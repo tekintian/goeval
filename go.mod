@@ -1,4 +1,4 @@
-module github.com/PaulXu-cn/goeval
+module github.com/tekintian/goeval
 
 go 1.13
 
