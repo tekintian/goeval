@@ -5,7 +5,7 @@ Evaluate Golang Code by the Eval Function
 # Install
 
 ```shell script
-$ go get github.com/PaulXu-cn/goeval
+$ go get github.com/tekintian/goeval
 ```
 
 # Usage
@@ -15,7 +15,7 @@ package main
 
 import (
     "fmt"
-    "github.com/PaulXu-cn/goeval"
+    "github.com/tekintian/goeval"
 )
 
 func main() {
