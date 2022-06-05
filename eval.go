@@ -1,11 +1,13 @@
 package goeval
 
 import (
+	"errors"
 	"fmt"
 	"go/format"
 	"math/rand"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -57,6 +59,13 @@ func main() {
 		fullCode string
 	 	newTmpDir = tempDir + dirSeparator + RandString(8)
 	)
+	
+	//检查是否包含危险操作,如果包含,直接返回失败
+	safeReg, _ := regexp.Compile(`(\bos\.|\brm\b|\bremove\b|\bdelete\b)`)
+	if safeReg.MatchString(code) {
+		dangerStr := safeReg.FindAllString(code, -1) // 查找所有匹配的危险字符
+		return nil, errors.New(fmt.Sprintf("当前代码包含危险字符: %v,\n已被系统阻止执行!", strings.Join(dangerStr, " ; ")))
+	}
 
 	if 0 < len(imports) {
 		importStr = "import ("
